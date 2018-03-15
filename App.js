@@ -141,7 +141,16 @@ class Networking{
   }
 
   static async getGroupsJoined(userId){
-    let returnedValue = await fetch('https://atio-v2.herokuapp.com/group/getGroupsJoined?userId='+userId);
+    let returnedValue = await fetch('https://atio-v2.herokuapp.com/group/getGroupsJoined', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: userId,
+      }),
+    });
 
     let responseJson = await returnedValue.json();
       
@@ -202,6 +211,63 @@ class Networking{
 
 
   }
+
+  static async getRantsFromGroup(groupId, userId, continueFrom){
+
+    if(!continueFrom){
+      let returnedValue = await fetch("https://atio-v2.herokuapp.com/group/getRantsFromGroup", {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userId,
+          groupId: groupId
+        })
+      });
+      if(returnedValue){
+        let responseJson = await returnedValue.json();
+        return new Promise((resolve, reject)=>{
+          resolve(responseJson);
+        });
+      }
+      else{
+        return new Promise((resolve, reject)=>{
+          reject("error");
+        });
+      }
+
+
+    }
+    else{
+      let returnedValue = await fetch("https://atio-v2.herokuapp.com/group/getRantsFromGroup", {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userId,
+          groupId: groupId,
+          continueFrom: continueFrom
+        })
+      });
+      if(returnedValue){
+        let responseJson = await returnedValue.json();
+        return new Promise((resolve, reject)=>{
+          resolve(responseJson);
+        });
+      }
+      else{
+        return new Promise((resolve, reject)=>{
+          reject("Error");
+        });
+      }
+    }
+
+  }
+
 }
 
 class NavBarComponent extends PureComponent{
@@ -396,25 +462,27 @@ class TimelineComponent extends PureComponent{
     super(props);
     this.state = {rants: [], isLoading: true, isRefreshing: false, modalVisible: false}
     this.refresh = this.refresh.bind(this);
+    this._getActiveGroup = this.refresh.bind(this);
   }
 
   componentDidMount(){
+    console.log("HERE",this.props.userId, this.props.activeGroup)
     
+    if(this.props.activeGroup && this.props.userId)
+      Networking.getRantsFromGroup(this.props.activeGroup, this.props.userId)
+      .then((response) =>{
+        this.setState((previousState) => {return {rants: response.res, isLoading: false, isRefreshing: false, modalVisible: previousState.modalVisible}}); 
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
 
-    Networking.getPublicRants()
-    .then((response) =>{
-      this.setState((previousState) => {return {rants: response.res, isLoading: false, isRefreshing: false, modalVisible: previousState.modalVisible}}); 
-    })
-    .catch((err)=>{
-      console.log(err);
-    });
   }
 
 
   loadMoreData(continueFrom){
-    Networking.getPublicRants(continueFrom)
+    Networking.getRantsFromGroup(this.props.activeGroup, this.props.userId, continueFrom)
     .then((response) =>{
-
       this.setState({rants: [...this.state.rants, ... response.res], isLoading: false, isRefreshing: false, modalVisible:false});
     })
     .catch((err)=>{
@@ -427,7 +495,7 @@ class TimelineComponent extends PureComponent{
   refresh(){
     console.log(this.state.isRefreshing);
     this.state.isRefreshing=true;
-    Networking.getPublicRants()
+    Networking.getRantsFromGroup(this.props.activeGroup, this.props.userId)
     .then((response) =>{
       if(this.state.rants[0].rant_id != response.res[0].rant_id){
         this.setState({rants: response.res, isLoading: false, isRefreshing: false, modalVisible:false}); 
@@ -446,7 +514,6 @@ class TimelineComponent extends PureComponent{
         
 
         <View style={Styles.singlePageStyle}>
-
 
           <FlatList
             data = {this.state.rants}
@@ -601,26 +668,10 @@ class GroupComponent extends PureComponent{
     return(
       <View style={{flex:1, borderTopLeftRadius:10, borderTopRightRadius:10, backgroundColor:'white', overflow:'hidden', paddingTop:5}}>
         <TextInput 
-        // onFocus={
-        //   ()=>{
-        //     console.log(this.state.query)
-        //     if(this.state.query.length<=0)
-        //       this.setState((previousState)=>{return {groupsJoined: previousState.groupsJoined, search:[], query: previousState.query||""}})
-        //   }
-        // }
-
-        // onBlur={
-        //   ()=>{
-        //     if(this.state.query.length<=0){
-        //       this.setState((previousState)=>{return {groupsJoined: previousState.groupsJoined, search:previousState.groupsJoined, query: previousState.query||""}})
-        //     }
-        //   }
-        // }
+        
         
         onChangeText={(text)=>{
-          // this.setState((previousState)=>{return {groupsJoined: previousState.groupsJoined, search:[], query: text}})
           this._searchGroupsLimit(text);
-
         }} placeholderTextColor="deepskyblue" placeholder='Search ...' style={{ borderBottomWidth:1, color:'deepskyblue', textAlign:'center', height:50, borderColor:'gainsboro', paddingLeft:10, paddingRight:10}}/>
         
         <GridView
@@ -656,6 +707,98 @@ class GroupComponent extends PureComponent{
   }
 }
 
+class SettingsModal extends PureComponent{
+  render(){
+    return(
+      <Modal
+          animationType="slide"
+          transparent={true}
+          
+          visible={this.props.modalVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+          }}>
+          <View style={{flex:1, backgroundColor:'rgba(0, 0, 0, 0.8)', padding:20, paddingTop:22}}>
+            <TouchableHighlight
+                onPress={() => {
+                  this.props.modalCloseAction(!this.props.modalVisible);
+                }}>
+                <Icon name="x" size={25} color="white"/>
+            </TouchableHighlight>
+            {/* GROUP SECTION */}
+            <View style={{borderRadius:10, backgroundColor:'rgba(0, 0, 0, 0.5)', height:200, marginTop:30, padding:15  }}>
+                <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Groups</Text>
+                <ScrollView horizontal={true} contentContainerStyle={{flexDirection:'row', justifyContent:'center'}}> 
+                  
+                  <GridView
+                    itemDiemension={130}
+                    items={this.props.groupsJoined}
+                    contentContainerStyle={{flex:1, padding:0, paddingTop:15}}
+                    horizontal= {true}
+                    renderItem={item => (
+                      <View 
+                        style={[{
+                          justifyContent: 'flex-end',
+                          borderColor:'gainsboro',
+                          backgroundColor:'#66d9ff',
+                          
+                          borderRadius: 5,
+                          padding: 10,
+                          height: 90,
+                          width: 90}, {backgroundColor: item.group_color
+                        }]}
+                      >
+                        <Text style={{fontSize: 16,
+                                      color: '#fff',
+                                      fontWeight: '600'}}
+                        >{(item.group_name.length > 15) ? item.group_name.substring(0, 11) + ' ... ' : item.group_name}</Text>
+                        <Text style={{fontWeight:'600', color:'white'}}>{item.members} joins</Text>
+                      </View>
+                    ) 
+                  }
+                  />
+                </ScrollView>
+            </View>
+
+            {/* THEME COLOR SECTION */}
+            <View style={{borderRadius:10, backgroundColor:'rgba(0, 0, 0, 0.5)', height:200, marginTop:30, padding:15  }}>
+                <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Theme Color</Text>
+                <ScrollView horizontal={true} contentContainerStyle={{flexDirection:'row', justifyContent:'center'}}> 
+                  
+                  <GridView
+                    itemDiemension={130}
+                    items={['deepskyblue', 'blueviolet', 'darkslategray', 'dodgerblue', 'firebrick']}
+                    contentContainerStyle={{flex:1, padding:0, paddingTop:15}}
+                    horizontal= {true}
+                    renderItem={item => (
+                    <View 
+                      style={[{justifyContent: 'flex-end',
+                      borderColor:'gainsboro',
+                      backgroundColor:'#66d9ff',
+                      
+                      borderRadius: 5,
+                      padding: 10,
+                      height: 90,
+                      width: 90}, {backgroundColor: item}]}
+                    >
+                    
+                    </View>
+                    
+                    )
+
+                  }
+                  />
+                </ScrollView>
+
+            </View>
+
+          </View>
+
+        </Modal>
+    );
+  }
+}
+
 export default class DisplayComponent extends Component {
     constructor(props){
       super(props);
@@ -671,9 +814,8 @@ export default class DisplayComponent extends Component {
     componentDidMount(){
       Networking.checkIfPhoneIsRegistered()
       .then((resp)=>{
-        this.setState({currentScreen: "Personal Rants", footer: ['deepskyblue', 'darkgray', 'darkgray'], confirmingLogin: false, isPhoneRegistered: true, verifyingRegistration:false, userId: resp, modalVisible:false, groupsJoined: []})
+        this.setState({...this.state, currentScreen: "Personal Rants", footer: ['deepskyblue', 'darkgray', 'darkgray'], isPhoneRegistered: true, userId: resp})
         this._getGroupsJoined();
-        console.log(resp)
       })
       .catch((err) => {
         this.setState({currentScreen: "Personal Rants", footer: ['deepskyblue', 'darkgray', 'darkgray'], confirmingLogin: false, isPhoneRegistered: false, verifyingRegistration:false});
@@ -685,9 +827,8 @@ export default class DisplayComponent extends Component {
       Keyboard.dismiss();
       switch(state.index){
         case 0:
-          this.setState((previousState)=>{return {...previousState, currentScreen: "Personal Rants", footer:['deepskyblue', 'darkgray', 'darkgray']}});
-          
-          console.log("Changed to rant");
+          this.setState((previousState)=>{return {...previousState, currentScreen: this.state.groupsJoined[0].group_name, footer:['deepskyblue', 'darkgray', 'darkgray']}});
+        
           break;
         case 1:
           this.setState((previousState)=>{return {...previousState, currentScreen: "Search Groups", footer:['darkgray', 'deepskyblue', 'darkgray']}});
@@ -727,7 +868,7 @@ export default class DisplayComponent extends Component {
         Networking.registerPhone(this.state.receivedUserId)
         .then((resp)=>{
           console.log(resp);
-          this.setState({currentScreen: "Home", footer: ['deepskyblue', 'darkgray', 'darkgray'], confirmingLogin: false, isPhoneRegistered: true, verifyingRegistration:false, userId:this.state.receivedUserId})
+          this.setState({...this.state, currentScreen: "Home", footer: ['deepskyblue', 'darkgray', 'darkgray'], isPhoneRegistered: true, verifyingRegistration:false, userId:this.state.receivedUserId})
           this._getGroupsJoined();
         })
         .catch((err)=>{
@@ -753,8 +894,10 @@ export default class DisplayComponent extends Component {
 
     _getGroupsJoined(){
       Networking.getGroupsJoined(this.state.userId).then((resp)=>{
-        this.setState({...this.state, groupsJoined: resp.res});     
-        console.log(resp);
+        if(resp.res[0])
+          this.setState({...this.state, currentScreen: resp.res[0].group_name, groupsJoined: resp.res, activeGroup: resp.res[0].group_id, confirmingLogin: false,});
+        else
+          this.setState({...this.state, currentScreen: "Public Rants", groupsJoined: resp.res, activeGroup: 1, confirmingLogin: false});
       })
     }
 
@@ -778,95 +921,12 @@ export default class DisplayComponent extends Component {
                     <View style={{flex:1}}>
                       <NavBarComponent title={this.state.currentScreen} navBarStyle={Styles.navBarStyle} showIcons={true} onPressRightButton={()=>{this._setModalVisible(true)}} ></NavBarComponent>
                       
-                      {/* GROUP MODAL */}
-                      <Modal
-                        animationType="slide"
-                        transparent={true}
-                        
-                        visible={this.state.modalVisible}
-                        onRequestClose={() => {
-                          alert('Modal has been closed.');
-                        }}>
-                        <View style={{flex:1, backgroundColor:'rgba(0, 0, 0, 0.8)', padding:20, paddingTop:22}}>
-                          <TouchableHighlight
-                              onPress={() => {
-                                this._setModalVisible(!this.state.modalVisible);
-                              }}>
-                              <Icon name="x" size={25} color="white"/>
-                          </TouchableHighlight>
-                          {/* GROUP SECTION */}
-                          <View style={{borderRadius:10, backgroundColor:'rgba(0, 0, 0, 0.5)', height:200, marginTop:30, padding:15  }}>
-                              <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Groups</Text>
-                              <ScrollView horizontal={true} contentContainerStyle={{flexDirection:'row', justifyContent:'center'}}> 
-                                
-                                <GridView
-                                  itemDiemension={130}
-                                  items={this.state.groupsJoined}
-                                  contentContainerStyle={{flex:1, padding:0, paddingTop:15}}
-                                  horizontal= {true}
-                                  renderItem={item => (
-                                    <View 
-                                      style={[{
-                                        justifyContent: 'flex-end',
-                                        borderColor:'gainsboro',
-                                        backgroundColor:'#66d9ff',
-                                        
-                                        borderRadius: 5,
-                                        padding: 10,
-                                        height: 90,
-                                        width: 90}, {backgroundColor: item.group_color
-                                      }]}
-                                    >
-                                      <Text style={{fontSize: 16,
-                                                    color: '#fff',
-                                                    fontWeight: '600'}}
-                                      >{(item.group_name.length > 15) ? item.group_name.substring(0, 11) + ' ... ' : item.group_name}</Text>
-                                      <Text style={{fontWeight:'600', color:'white'}}>{item.members} joins</Text>
-                                    </View>
-                                  ) 
-                                }
-                                />
-                              </ScrollView>
-                          </View>
-
-                          {/* THEME COLOR SECTION */}
-                          <View style={{borderRadius:10, backgroundColor:'rgba(0, 0, 0, 0.5)', height:200, marginTop:30, padding:15  }}>
-                              <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Theme Color</Text>
-                              <ScrollView horizontal={true} contentContainerStyle={{flexDirection:'row', justifyContent:'center'}}> 
-                                
-                                <GridView
-                                  itemDiemension={130}
-                                  items={['deepskyblue', 'blueviolet', 'darkslategray', 'dodgerblue', 'firebrick']}
-                                  contentContainerStyle={{flex:1, padding:0, paddingTop:15}}
-                                  horizontal= {true}
-                                  renderItem={item => (
-                                  <View 
-                                    style={[{justifyContent: 'flex-end',
-                                    borderColor:'gainsboro',
-                                    backgroundColor:'#66d9ff',
-                                    
-                                    borderRadius: 5,
-                                    padding: 10,
-                                    height: 90,
-                                    width: 90}, {backgroundColor: item}]}
-                                  >
-                                  
-                                  </View>
-                                  
-                                  )
-
-                                }
-                                />
-                              </ScrollView>
-
-                          </View>
-
-                        </View>
-
-                      </Modal>
+                      {/* SETTINGS MODAL */}
+                      <SettingsModal modalVisible={this.state.modalVisible} groupsJoined={this.state.groupsJoined || []} modalCloseAction = {this._setModalVisible}/>
 
                       <Swiper index={0} showsPagination={false} onMomentumScrollEnd = {this._onSwipe} keyboardDismissMode="on-drag" loop={false}>
-                        <TimelineComponent/>
+
+                        <TimelineComponent activeGroup = {this.state.activeGroup || null} userId = {this.state.userId || null}/>
                         <GroupComponent userId={this.state.userId}/>
                         <View style={{flex:1, borderTopLeftRadius:10, borderTopRightRadius:10, backgroundColor:'white', overflow:'hidden', paddingTop:5}}>
                         </View>
@@ -874,7 +934,7 @@ export default class DisplayComponent extends Component {
                       </Swiper>
                       <FooterComponent highlights= {this.state.footer}/>
                     </View>
-                  </Swiper>
+                </Swiper>
               </View>
           );
         }
