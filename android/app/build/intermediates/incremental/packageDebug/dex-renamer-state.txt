@@ -1,0 +1,4 @@
+#Sat Mar 17 21:19:01 GST 2018
+base.0=/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

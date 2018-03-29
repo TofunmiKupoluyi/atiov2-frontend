@@ -1,7 +1,10 @@
 import { createStore } from 'redux';
 
 const initialState = {
+    modalOpen: false,
     groupsJoined:  [],
+    selectedGroupId:"",
+    userId:"",
     search: {isFetching: false, search: [], query: "", lastQueryTime:0}
 }
   
@@ -15,6 +18,14 @@ export function completeSearchAction(timeQueryStarted, res){
 
 export function updateGroupsJoinedAction(res){
     return {type: 'UPDATE_GROUP_JOINED_ACTION', res:res}
+}
+
+export function toggleModalAction(state, groupId){
+    return {type: 'TOGGLE_MODAL', state:state, selectedGroupId: groupId}
+}
+
+export function enteringAccessCode(accessCode){
+    return {type: 'ENTERING_ACCESS_CODE', accessCode: accessCode}
 }
   
 function groupReducer(state = initialState, action){
@@ -39,6 +50,12 @@ function groupReducer(state = initialState, action){
                 break;
             case 'UPDATE_GROUP_JOINED_ACTION':
                 return Object.assign({}, state, {groupsJoined: action.res});
+                break;
+            case 'TOGGLE_MODAL':
+                return Object.assign({}, state, {accessCode:'', modalOpen: action.state, selectedGroupId: action.selectedGroupId});
+                break;
+            case 'ENTERING_ACCESS_CODE':
+                return Object.assign({}, state, {accessCode: action.accessCode});
                 break;
         }
 

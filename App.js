@@ -1,13 +1,13 @@
 
 import React, {PureComponent ,Component } from 'react';
-import { Modal, FlatList, StyleSheet, Text, View, StatusBar, Image, TouchableHighlight, ActivityIndicator, TextInput, Keyboard, KeyboardAvoidingView, Button, ScrollView, AsyncStorage } from 'react-native';
+import { Modal, FlatList, StyleSheet, Text, View, StatusBar, Image, TouchableHighlight, TouchableWithoutFeedback, ActivityIndicator, TextInput, Keyboard, KeyboardAvoidingView, Button, ScrollView, AsyncStorage } from 'react-native';
 import { createStore } from 'redux';
 import Swiper from 'react-native-swiper';
 import GridView from 'react-native-super-grid';
 import Icon from 'react-native-vector-icons/Feather'
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import store, {startSearchAction, completeSearchAction, updateGroupsJoinedAction} from './reduxScripts'
+import store, {startSearchAction, completeSearchAction, toggleModalAction, enteringAccessCode} from './reduxScripts'
 
 
 const Styles = StyleSheet.create({
@@ -159,6 +159,7 @@ class Networking{
     });
   }
 
+
   static async searchGroupsLimit(query, offset){
     if(!offset){
       let returnedValue = await fetch("https://atio-v2.herokuapp.com/group/searchGroupsLimit?query="+query);
@@ -185,6 +186,41 @@ class Networking{
       });
     }
     
+  }
+
+  static async joinGroup(userId, groupId, accessCode){
+    if(userId && groupId && accessCode){
+      let returnedValue = await fetch('https://atio-v2.herokuapp.com/group/joinGroup', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userId,
+          groupId: groupId,
+          accessCode: accessCode
+        }),
+      });
+
+      let responseJson = await returnedValue.json();
+      return new Promise((resolve, reject)=>{
+        if(responseJson.err==1){
+          reject(responseJson.res);
+        }
+        else{
+          resolve(responseJson);
+        }
+      });
+
+    }
+
+    else{
+      return new Promise((resolve, reject)=>{
+        reject("Error in query")
+      })
+    }
+
   }
 
   static getPublicRants(continueFrom){
@@ -226,6 +262,7 @@ class Networking{
           groupId: groupId
         })
       });
+      console.log(returnedValue);
       if(returnedValue){
         let responseJson = await returnedValue.json();
         return new Promise((resolve, reject)=>{
@@ -259,18 +296,20 @@ class Networking{
           resolve(responseJson);
         });
       }
+
       else{
         return new Promise((resolve, reject)=>{
           reject("Error");
         });
       }
+
     }
 
   }
 
 }
 
-class NavBarComponent extends PureComponent{
+class NavBarComponent extends Component{
   constructor(props){
     super(props);
   }
@@ -315,7 +354,7 @@ class NavBarComponent extends PureComponent{
 
 }
 
-class RantNavBarComponent extends Component{
+class RantNavBarComponent extends PureComponent{
 
   render(){
     return(
@@ -336,7 +375,7 @@ class RantNavBarComponent extends Component{
   }
 }
 
-class CardComponent extends Component{
+class CardComponent extends PureComponent{
   generateTime(timeStamp) {
     var now = new Date(),
     secondsPast = (now.getTime() - timeStamp.getTime()) / 1000;
@@ -393,7 +432,7 @@ class CardComponent extends Component{
   }
 }
 
-class ImageCardComponent extends Component{
+class ImageCardComponent extends PureComponent{
   generateTime(timeStamp) {
     var now = new Date(),
     secondsPast = (now.getTime() - timeStamp.getTime()) / 1000;
@@ -467,16 +506,26 @@ class TimelineComponent extends PureComponent{
 
   componentDidMount(){
     console.log("HERE",this.props.userId, this.props.activeGroup)
-    
+
     if(this.props.activeGroup && this.props.userId)
       Networking.getRantsFromGroup(this.props.activeGroup, this.props.userId)
       .then((response) =>{
         this.setState((previousState) => {return {rants: response.res, isLoading: false, isRefreshing: false, modalVisible: previousState.modalVisible}}); 
       })
       .catch((err)=>{
-        console.log(err);
+        console.log( err);
       });
+    
+    else{
+      this.setState({...this.state, isLoading:false})
+    }
 
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(this.props.activeGroup != prevProps.activeGroup){
+      this.refresh()
+    }
   }
 
 
@@ -497,11 +546,16 @@ class TimelineComponent extends PureComponent{
     this.state.isRefreshing=true;
     Networking.getRantsFromGroup(this.props.activeGroup, this.props.userId)
     .then((response) =>{
-      if(this.state.rants[0].rant_id != response.res[0].rant_id){
-        this.setState({rants: response.res, isLoading: false, isRefreshing: false, modalVisible:false}); 
+      if(response.res.length>0){
+        if(!( (this.state.rants[0]) && (this.state.rants[0].rant_id == response.res[0].rant_id) ))
+          this.setState({rants: response.res, isLoading: false, isRefreshing: false, modalVisible:false}); 
       }
+      else
+        this.setState({rants: response.res, isLoading: false, isRefreshing: false, modalVisible:false}); 
+    
     })
     .catch((err)=>{
+      
       console.log(err);
     });
   }
@@ -509,7 +563,7 @@ class TimelineComponent extends PureComponent{
   
 
   render(){
-    if(!this.state.isLoading){
+    if(!this.state.isLoading && this.state.rants.length>0){
       return(
         
 
@@ -539,12 +593,23 @@ class TimelineComponent extends PureComponent{
       );
     }
 
-    else{
+    else if(this.state.isLoading ){
       return(
         <View style={Styles.loadingPageStyle}>
           <ActivityIndicator size="large" color="skyblue" />
         </View>
 
+      );
+    }
+    else{
+      return(
+        <View style={Styles.singlePageStyle}>
+          <FlatList
+            data = {[]}
+            refreshing = {this.state.isRefreshing}
+            onRefresh = {()=> {this.refresh()}}
+            />
+        </View>
       );
     }
   }
@@ -641,7 +706,11 @@ class GroupComponent extends PureComponent{
   constructor(props){
     super(props);
     this._searchGroupsLimit= this._searchGroupsLimit.bind(this);
-    this.state = (store.getState()) ? store.getState().search : {};
+    this._changeAccessCode = this._changeAccessCode.bind(this);
+    this._checkIfGroupAlreadyJoined = this._checkIfGroupAlreadyJoined.bind(this);
+    this.state = store.getState() || {};
+
+    console.log(store.getState());
   }
 
 
@@ -653,53 +722,130 @@ class GroupComponent extends PureComponent{
       var timeStarted = Date.now();
       Networking.searchGroupsLimit(query).then((resp)=>{
         store.dispatch(completeSearchAction(timeStarted, resp.res));
-        this.setState(store.getState().search);
+        this.setState(store.getState());
       });
     }
     else{
       store.dispatch(startSearchAction(query));
       store.dispatch(completeSearchAction(Date.now(), []));
-      this.setState(store.getState().search);
+      this.setState(store.getState());
     }
 
+  }
+
+  async _checkIfGroupAlreadyJoined(groupId){
+    
+    return new Promise((resolve, reject)=>{
+      for(let i=0; i< this.props.groupsJoined.length; i++){
+        if(this.props.groupsJoined[i].group_id == groupId){
+          console.log(groupId);
+          var isGroupAlreadyJoined = true;
+          var index= i;
+        }
+      }
+      if(!isGroupAlreadyJoined){
+        var isGroupAlreadyJoined=false;
+      }
+      resolve([isGroupAlreadyJoined, index]);
+    });
+
+  }
+
+  _toggleModal(state, groupId){
+    this._checkIfGroupAlreadyJoined(groupId).then((resp)=>{
+      console.log(resp);  
+      if(!resp[0]){
+        store.dispatch(toggleModalAction(state, groupId));
+        this.setState(store.getState());
+      }
+      else{
+        this.props.swiper.scrollBy(-1, true);
+        this.props.changeGroup(resp[1]);
+      }
+    });
+
+    
+  }
+
+  _joinGroup(){
+    if(this.state.accessCode)
+      Networking.joinGroup(this.props.userId, this.state.selectedGroupId, this.state.accessCode).then(()=>{
+        this.props.getGroupsJoined();
+        this._toggleModal(false);
+      })
+  }
+
+  _changeAccessCode(text){
+    store.dispatch(enteringAccessCode(text));
+    this.setState(store.getState());
   }
 
   render(){
     return(
       <View style={{flex:1, borderTopLeftRadius:10, borderTopRightRadius:10, backgroundColor:'white', overflow:'hidden', paddingTop:5}}>
         <TextInput 
-        
-        
         onChangeText={(text)=>{
           this._searchGroupsLimit(text);
         }} placeholderTextColor="deepskyblue" placeholder='Search ...' style={{ borderBottomWidth:1, color:'deepskyblue', textAlign:'center', height:50, borderColor:'gainsboro', paddingLeft:10, paddingRight:10}}/>
         
+        {/* Expand item modal */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          
+          visible={this.state.modalOpen || false}
+          >
+          <TouchableWithoutFeedback style={{flex:1, backgroundColor: 'rgba(0, 0, 0, 0.5)', padding:22 }} onPress={()=>{this._toggleModal(false)}}>
+            
+            <View style={{flex:1, padding:20, backgroundColor:'rgba(0,0,0,0.7)'}}>
+              {/* <TouchableHighlight onPress={()=>{this._toggleModal(false)}}>
+                <Icon name="x" size={25} color="white"></Icon>
+              </TouchableHighlight> */}
+              <View style={{flex:1, paddingBottom:47, justifyContent:'center'}}>
+                <View style={{height:200, marginTop:10, borderRadius:5, padding:20, backgroundColor:'rgba(0, 0, 0, 0.5)'}}>
+                  <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Join Group</Text>
+                  <TextInput onChangeText={(text)=>{ this._changeAccessCode(text);  }} placeholder= 'Enter access code ...' placeholderTextColor='white' style={{height:50, color:'white', backgroundColor:'rgba(0, 0, 0, 0.6)', borderRadius:5, marginTop:20, padding:10 }}></TextInput>
+                  
+                  <TouchableHighlight onPress={()=>{this._joinGroup()}}>
+                    <View style={{height:35, marginTop:20, backgroundColor:'deepskyblue', borderRadius:3, justifyContent:'center', alignItems:'center'}}>
+                      <Text style={{color:'white', textAlign:'center', alignSelf:'center', fontWeight:'bold'}}>Join</Text>
+                    </View>
+                  </TouchableHighlight>
+                </View>
+              </View>
+            </View>
+
+          </TouchableWithoutFeedback>
+          
+        </Modal>
         <GridView
           itemDiemension={130}
-          items={this.state.search || []}
+          items={(this.state.search) ? this.state.search.search : []}
           contentContainerStyle={{paddingBottom:10}}
-          refreshing = {this.state.isFetching}
+          refreshing = {(this.state.search) ? this.state.search.isFetching: false}
           renderItem={item => (
-          <View 
-            style={[{justifyContent: 'flex-end',
-            borderColor:'gainsboro',
-            backgroundColor:'#66d9ff',
-            
-            borderRadius: 5,
-            padding: 10,
-            height: 150,
-          }, {backgroundColor: item.group_color}]}
-          >
-            <Text style={{fontSize: 16,
-                          color: '#fff',
-                          fontWeight: '600'}}
-            >{item.group_name}</Text>
-            <Text style={{fontWeight:'600', color:'white'}}>{item.members} joins</Text>
-          </View>)
+            <TouchableHighlight onPress={()=>{this._toggleModal(true, item.group_id) }}>
+            <View 
+              style={[{justifyContent: 'flex-end',
+              borderColor:'gainsboro',
+              backgroundColor:'#66d9ff',
+              
+              borderRadius: 5,
+              padding: 10,
+              height: 150,
+            }, {backgroundColor: item.group_color}]}
+            >
+              <Text style={{fontSize: 16,
+                            color: '#fff',
+                            fontWeight: '600'}}
+              >{item.group_name}</Text>
+              <Text style={{fontWeight:'600', color:'white'}}>{item.members} joins</Text>
+            </View>
+            </TouchableHighlight>
+          
+          )
           
         }
-
-
         />
        
       </View>
@@ -715,9 +861,7 @@ class SettingsModal extends PureComponent{
           transparent={true}
           
           visible={this.props.modalVisible}
-          onRequestClose={() => {
-            alert('Modal has been closed.');
-          }}>
+          >
           <View style={{flex:1, backgroundColor:'rgba(0, 0, 0, 0.8)', padding:20, paddingTop:22}}>
             <TouchableHighlight
                 onPress={() => {
@@ -725,73 +869,115 @@ class SettingsModal extends PureComponent{
                 }}>
                 <Icon name="x" size={25} color="white"/>
             </TouchableHighlight>
-            {/* GROUP SECTION */}
-            <View style={{borderRadius:10, backgroundColor:'rgba(0, 0, 0, 0.5)', height:200, marginTop:30, padding:15  }}>
-                <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Groups</Text>
-                <ScrollView horizontal={true} contentContainerStyle={{flexDirection:'row', justifyContent:'center'}}> 
-                  
-                  <GridView
-                    itemDiemension={130}
-                    items={this.props.groupsJoined}
-                    contentContainerStyle={{flex:1, padding:0, paddingTop:15}}
-                    horizontal= {true}
-                    renderItem={item => (
-                      <View 
-                        style={[{
-                          justifyContent: 'flex-end',
-                          borderColor:'gainsboro',
-                          backgroundColor:'#66d9ff',
+            <TouchableWithoutFeedback style={{flex:1}} onPress={()=>{this.props.modalCloseAction(!this.props.modalVisible);}}>
+                <View style={{flex:1, justifyContent:'center', paddingBottom:47}}>
+                  {/* GROUP SECTION */}
+                  <View style={{borderRadius:10, backgroundColor:'rgba(0, 0, 0, 0.5)', height:200, marginTop:30, padding:15  }}>
+                      <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Groups</Text>
+                      <ScrollView horizontal={true} contentContainerStyle={{flexDirection:'row', justifyContent:'center'}}> 
+                        
+                        <GridView
+                          itemDiemension={130}
+                          items={this.props.groupsJoined}
+                          contentContainerStyle={{flex:1, padding:0, paddingTop:15}}
+                          horizontal= {true}
+                          renderItem={item =>{
+                            
+                            if(item.group_id == this.props.activeGroup){
+                              return(
+                                <TouchableWithoutFeedback style={{flex:1}}>
+                                  <View style={{flex:1}}>
+                                    <View
+                                      style={[{
+                                        justifyContent: 'flex-end',
+                                        borderColor:'gainsboro',
+                                        backgroundColor:'#66d9ff',
+                                        borderRadius: 5,
+                                        padding: 10,
+                                        height: 90,
+                                        width: 90}, {backgroundColor: item.group_color
+                                      }]}> 
+                                    <Text style={{fontSize: 16,
+                                                  color: '#fff',
+                                                  fontWeight: '600'}}
+                                    >{(item.group_name.length > 15) ? item.group_name.substring(0, 11) + ' ... ' : item.group_name}</Text>
+                                    <Text style={{fontWeight:'600', color:'white'}}>{item.members} joins</Text>
+                                  </View>
+                                  <View style={{position:'absolute', justifyContent:'flex-end', alignItems:'flex-end', borderRadius:5, height:90, width:90, flex:1, backgroundColor:'rgba(0,0,0,0.3)', padding:5}}>
+                                      <Icon name='check' size={25} color="white"/>
+                                  </View>
+                                </View>
+                              </TouchableWithoutFeedback>
+                              
+                              );   
+                            }
+
+                            else{
+                              return(
+                                <TouchableHighlight onPress={()=>{this.props.changeGroupFunction(item.arrIndex)}} style={{flex:1}}>
+                                  <View 
+                                    style={[{
+                                      justifyContent: 'flex-end',
+                                      borderColor:'gainsboro',
+                                      backgroundColor:'#66d9ff',
+                                      
+                                      borderRadius: 5,
+                                      padding: 10,
+                                      height: 90,
+                                      width: 90}, {backgroundColor: item.group_color
+                                    }]}
+                                  >
+                                    <Text style={{fontSize: 16,
+                                                  color: '#fff',
+                                                  fontWeight: '600'}}
+                                    >{(item.group_name.length > 15) ? item.group_name.substring(0, 11) + ' ... ' : item.group_name}</Text>
+                                    <Text style={{fontWeight:'600', color:'white'}}>{item.members} joins</Text>
+                                  </View>
+                                </TouchableHighlight>
+                                ); 
+                            }
                           
-                          borderRadius: 5,
-                          padding: 10,
-                          height: 90,
-                          width: 90}, {backgroundColor: item.group_color
-                        }]}
-                      >
-                        <Text style={{fontSize: 16,
-                                      color: '#fff',
-                                      fontWeight: '600'}}
-                        >{(item.group_name.length > 15) ? item.group_name.substring(0, 11) + ' ... ' : item.group_name}</Text>
-                        <Text style={{fontWeight:'600', color:'white'}}>{item.members} joins</Text>
-                      </View>
-                    ) 
-                  }
-                  />
-                </ScrollView>
-            </View>
+                        }
+                        }
+                        />
+                      </ScrollView>
+                  </View>
 
-            {/* THEME COLOR SECTION */}
-            <View style={{borderRadius:10, backgroundColor:'rgba(0, 0, 0, 0.5)', height:200, marginTop:30, padding:15  }}>
-                <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Theme Color</Text>
-                <ScrollView horizontal={true} contentContainerStyle={{flexDirection:'row', justifyContent:'center'}}> 
-                  
-                  <GridView
-                    itemDiemension={130}
-                    items={['deepskyblue', 'blueviolet', 'darkslategray', 'dodgerblue', 'firebrick']}
-                    contentContainerStyle={{flex:1, padding:0, paddingTop:15}}
-                    horizontal= {true}
-                    renderItem={item => (
-                    <View 
-                      style={[{justifyContent: 'flex-end',
-                      borderColor:'gainsboro',
-                      backgroundColor:'#66d9ff',
-                      
-                      borderRadius: 5,
-                      padding: 10,
-                      height: 90,
-                      width: 90}, {backgroundColor: item}]}
-                    >
-                    
-                    </View>
-                    
-                    )
+                  {/* THEME COLOR SECTION */}
+                  <View style={{borderRadius:10, backgroundColor:'rgba(0, 0, 0, 0.5)', height:200, marginTop:30, padding:15  }}>
+                      <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Theme Color</Text>
+                      <ScrollView horizontal={true} contentContainerStyle={{flexDirection:'row', justifyContent:'center'}}> 
+                        
+                        <GridView
+                          itemDiemension={130}
+                          items={['deepskyblue', 'blueviolet', 'darkslategray', 'dodgerblue', 'firebrick']}
+                          contentContainerStyle={{flex:1, padding:0, paddingTop:15}}
+                          horizontal= {true}
+                          renderItem={item => (
+                          <TouchableHighlight>
+                            <View
+                              style={[{justifyContent: 'flex-end',
+                              borderColor:'gainsboro',
+                              backgroundColor:'#66d9ff',
+                              
+                              borderRadius: 5,
+                              padding: 10,
+                              height: 90,
+                              width: 90}, {backgroundColor: item}]}
+                            >
+                            
+                            </View>
+                          </TouchableHighlight>
+                          
+                          )
 
-                  }
-                  />
-                </ScrollView>
+                        }
+                        />
+                      </ScrollView>
 
-            </View>
-
+                  </View>
+              </View>
+            </TouchableWithoutFeedback>
           </View>
 
         </Modal>
@@ -808,7 +994,7 @@ export default class DisplayComponent extends Component {
       this._verifyingRegistration = this._verifyingRegistration.bind(this);
       this._setModalVisible = this._setModalVisible.bind(this)
       this._getGroupsJoined = this._getGroupsJoined.bind(this);
-      
+      this._changeGroup = this._changeGroup.bind(this);
     }
 
     componentDidMount(){
@@ -827,7 +1013,7 @@ export default class DisplayComponent extends Component {
       Keyboard.dismiss();
       switch(state.index){
         case 0:
-          this.setState((previousState)=>{return {...previousState, currentScreen: this.state.groupsJoined[0].group_name, footer:['deepskyblue', 'darkgray', 'darkgray']}});
+          this.setState((previousState)=>{return {...previousState, currentScreen: (this.state.groupsJoined[this.state.activeGroupIndex]) ? ((this.state.groupsJoined[this.state.activeGroupIndex].group_name.length < 15) ? this.state.groupsJoined[this.state.activeGroupIndex].group_name :  this.state.groupsJoined[this.state.activeGroupIndex].group_name.substring(0,12)+" ... ") : "Join A Group :) ->", footer:['deepskyblue', 'darkgray', 'darkgray']}});
         
           break;
         case 1:
@@ -840,6 +1026,8 @@ export default class DisplayComponent extends Component {
           this.setState((previousState)=>{return{...previousState, currentScreen: "Home", footer:['deepskyblue', 'darkgray', 'darkgray']}});
       }
     }
+
+    
 
 
     _dismissKeyboard(){
@@ -868,7 +1056,7 @@ export default class DisplayComponent extends Component {
         Networking.registerPhone(this.state.receivedUserId)
         .then((resp)=>{
           console.log(resp);
-          this.setState({...this.state, currentScreen: "Home", footer: ['deepskyblue', 'darkgray', 'darkgray'], isPhoneRegistered: true, verifyingRegistration:false, userId:this.state.receivedUserId})
+          this.setState({...this.state, currentScreen: "Home", footer: ['deepskyblue', 'darkgray', 'darkgray'], verifyingRegistration:false, userId:this.state.receivedUserId})
           this._getGroupsJoined();
         })
         .catch((err)=>{
@@ -892,14 +1080,22 @@ export default class DisplayComponent extends Component {
       this.setState({...this.state, modalVisible:visible});
     }
 
+    _changeGroup(index){
+      this.setState({...this.state, activeGroupIndex:index, currentScreen: (this.state.groupsJoined[index].group_name.length<15) ? this.state.groupsJoined[index].group_name : this.state.groupsJoined[index].group_name.substring(0, 12)+ " ... " });
+    }
+
     _getGroupsJoined(){
       Networking.getGroupsJoined(this.state.userId).then((resp)=>{
+        resp.res = resp.res.map((currentValue,index, arr)=>{
+          return {...currentValue, arrIndex:index};
+        });
         if(resp.res[0])
-          this.setState({...this.state, currentScreen: resp.res[0].group_name, groupsJoined: resp.res, activeGroup: resp.res[0].group_id, confirmingLogin: false,});
+          this.setState({...this.state, currentScreen: (resp.res[0].group_name.length<15) ? resp.res[0].group_name : resp.res[0].group_name.substring(0,12)+" ... " , groupsJoined: resp.res, activeGroupIndex:0, confirmingLogin: false, isPhoneRegistered: true,});
         else
-          this.setState({...this.state, currentScreen: "Public Rants", groupsJoined: resp.res, activeGroup: 1, confirmingLogin: false});
+          this.setState({...this.state, currentScreen: "Join A Group :) ->", groupsJoined: resp.res, activeGroupIndex:0, confirmingLogin: false, isPhoneRegistered: true,});
       })
     }
+
 
     render() {
       
@@ -910,6 +1106,7 @@ export default class DisplayComponent extends Component {
         )
       }
       else{
+
         if(this.state.isPhoneRegistered){
           return ( 
               <View style = {{flex: 1, backgroundColor:'deepskyblue'}}>
@@ -922,12 +1119,10 @@ export default class DisplayComponent extends Component {
                       <NavBarComponent title={this.state.currentScreen} navBarStyle={Styles.navBarStyle} showIcons={true} onPressRightButton={()=>{this._setModalVisible(true)}} ></NavBarComponent>
                       
                       {/* SETTINGS MODAL */}
-                      <SettingsModal modalVisible={this.state.modalVisible} groupsJoined={this.state.groupsJoined || []} modalCloseAction = {this._setModalVisible}/>
-
-                      <Swiper index={0} showsPagination={false} onMomentumScrollEnd = {this._onSwipe} keyboardDismissMode="on-drag" loop={false}>
-
-                        <TimelineComponent activeGroup = {this.state.activeGroup || null} userId = {this.state.userId || null}/>
-                        <GroupComponent userId={this.state.userId}/>
+                      <SettingsModal modalVisible={this.state.modalVisible} groupsJoined={this.state.groupsJoined || []} modalCloseAction = {this._setModalVisible} activeGroup={(this.state.groupsJoined[this.state.activeGroupIndex])? this.state.groupsJoined[this.state.activeGroupIndex].group_id : null} changeGroupFunction = {this._changeGroup}/>
+                      <Swiper index={0} showsPagination={false} onMomentumScrollEnd = {this._onSwipe} keyboardDismissMode="on-drag" loop={false} ref={(swiper) => {this.swiper = swiper;}}>
+                        <TimelineComponent activeGroup = {(this.state.groupsJoined[this.state.activeGroupIndex])? this.state.groupsJoined[this.state.activeGroupIndex].group_id : null} userId = {this.state.userId || null}/>
+                        <GroupComponent userId={this.state.userId} groupsJoined = {this.state.groupsJoined} getGroupsJoined = {this._getGroupsJoined} swiper ={this.swiper} changeGroup={this._changeGroup}/>
                         <View style={{flex:1, borderTopLeftRadius:10, borderTopRightRadius:10, backgroundColor:'white', overflow:'hidden', paddingTop:5}}>
                         </View>
                         
