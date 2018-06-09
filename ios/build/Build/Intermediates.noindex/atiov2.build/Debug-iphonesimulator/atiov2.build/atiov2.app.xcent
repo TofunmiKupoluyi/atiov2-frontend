@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>Z4847CV4J4.org.reactjs.native.example.atiov2</string>
+	<string>Z4847CV4J4.com.audiri.atio</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>Z4847CV4J4.org.reactjs.native.example.atiov2</string>
+		<string>Z4847CV4J4.com.audiri.atio</string>
 	</array>
 </dict>
 </plist>

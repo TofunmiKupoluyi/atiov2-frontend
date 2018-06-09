@@ -4,9 +4,57 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>AppIcon20x20@2x.png</key>
+		<data>
+		pSdN/agBYTpGCZDNT/IPxN2zntY=
+		</data>
+		<key>AppIcon20x20@3x.png</key>
+		<data>
+		i2BR3BoRPMEqPnuBnXaq5NYGBwE=
+		</data>
+		<key>AppIcon29x29.png</key>
+		<data>
+		UKyGYj0x/MfLEbLvsGPjtbg7utQ=
+		</data>
+		<key>AppIcon29x29@2x.png</key>
+		<data>
+		VbOy5dLJIRG0c/UClFYQmzX4yr4=
+		</data>
+		<key>AppIcon29x29@3x.png</key>
+		<data>
+		DEZauGatrH6llzQonbzok3znB/I=
+		</data>
+		<key>AppIcon40x40@2x.png</key>
+		<data>
+		QJxH7XVKiBqd2+ZFCWOfwLZ+TnI=
+		</data>
+		<key>AppIcon40x40@3x.png</key>
+		<data>
+		oG5KmOCpQiUDpvvQ5BCULztEO5Q=
+		</data>
+		<key>AppIcon57x57.png</key>
+		<data>
+		5dJSNo3wiG4iAWraMneyTmYPTBY=
+		</data>
+		<key>AppIcon57x57@2x.png</key>
+		<data>
+		XYiSAjAZdLTuA8jy7iYx9dFlcUs=
+		</data>
+		<key>AppIcon60x60@2x.png</key>
+		<data>
+		oG5KmOCpQiUDpvvQ5BCULztEO5Q=
+		</data>
+		<key>AppIcon60x60@3x.png</key>
+		<data>
+		6iykKt1TKMuDC9IBYUHcMzFhmP0=
+		</data>
+		<key>Assets.car</key>
+		<data>
+		Z0wIjJd0dAydumTEROBdf7yCdYE=
+		</data>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		T/BufsSfMBMCTYTljHU2gCawaI8=
+		15Hmon+naLjsMZXr5j3AiADHDcY=
 		</data>
 		<key>Entypo.ttf</key>
 		<data>
@@ -71,7 +119,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		gYMJQ1fcsAF+0Oj/p6FSn4W4Jhk=
+		xgQGmgIsEEtElisf+g6qZI6H+w0=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -99,19 +147,19 @@
 		</data>
 		<key>PlugIns/atiov2Tests.xctest.dSYM/Contents/Resources/DWARF/atiov2Tests</key>
 		<data>
-		bm6vpouM/Flp/lj8v/FPTNoeRLQ=
+		0zYPQ3JcWBGghSCdyYXXKZ2d134=
 		</data>
 		<key>PlugIns/atiov2Tests.xctest/Info.plist</key>
 		<data>
-		pAXsY8SYmlrGsLLLGDd6zQah3Dw=
+		o6PmU7ZObFcIE3n1Nv3yoBIivt0=
 		</data>
 		<key>PlugIns/atiov2Tests.xctest/_CodeSignature/CodeResources</key>
 		<data>
-		qsJUtRFe/L57zmKzdXtBL/+C5O8=
+		3ExpfXFybf8lt2B0SEdJ1r2Ld10=
 		</data>
 		<key>PlugIns/atiov2Tests.xctest/atiov2Tests</key>
 		<data>
-		rv5r8+qBiZLvbWXWgu2SDN8Vadc=
+		fXxMRGN5IULnILaLxZKleFLTOd4=
 		</data>
 		<key>SimpleLineIcons.ttf</key>
 		<data>
@@ -124,15 +172,147 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>AppIcon20x20@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			pSdN/agBYTpGCZDNT/IPxN2zntY=
+			</data>
+			<key>hash2</key>
+			<data>
+			zpJsO6ayYDpBV9J2R+Ysh/0NCFJ1Kg3VYWlD60gbb48=
+			</data>
+		</dict>
+		<key>AppIcon20x20@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			i2BR3BoRPMEqPnuBnXaq5NYGBwE=
+			</data>
+			<key>hash2</key>
+			<data>
+			EIbaDmM6M9YqbW6oWRm2JNF6nIFONFN6cyQn1+TXHxs=
+			</data>
+		</dict>
+		<key>AppIcon29x29.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			UKyGYj0x/MfLEbLvsGPjtbg7utQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			sHEe1WXqU9Rc0PwoNavO1apzYdgZvDhQ8/UxDbS5nYc=
+			</data>
+		</dict>
+		<key>AppIcon29x29@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VbOy5dLJIRG0c/UClFYQmzX4yr4=
+			</data>
+			<key>hash2</key>
+			<data>
+			mSe8u2DK+fxd5sLWUtIozjgBKDBupBpb1M1/j2B/RBQ=
+			</data>
+		</dict>
+		<key>AppIcon29x29@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			DEZauGatrH6llzQonbzok3znB/I=
+			</data>
+			<key>hash2</key>
+			<data>
+			STKef1b9gYaU9TVydPOKxb6rSGPHzP89ccF5/68PK40=
+			</data>
+		</dict>
+		<key>AppIcon40x40@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			QJxH7XVKiBqd2+ZFCWOfwLZ+TnI=
+			</data>
+			<key>hash2</key>
+			<data>
+			qO0Lg2BzjN9TnhNrxThNRiSlP6lGXZ+VvfcbpMrWgWE=
+			</data>
+		</dict>
+		<key>AppIcon40x40@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			oG5KmOCpQiUDpvvQ5BCULztEO5Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			5drPdcptl6BiY2Sr8vhfStU+7UbvrQMBkVfZ3IEARAU=
+			</data>
+		</dict>
+		<key>AppIcon57x57.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5dJSNo3wiG4iAWraMneyTmYPTBY=
+			</data>
+			<key>hash2</key>
+			<data>
+			FGHaDuIZxi+ckoFHw43dK2OUPfbbxzt5bsXdyIlMyzc=
+			</data>
+		</dict>
+		<key>AppIcon57x57@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XYiSAjAZdLTuA8jy7iYx9dFlcUs=
+			</data>
+			<key>hash2</key>
+			<data>
+			1+ZgIssRCEzPLKy66TYMNv/g8+AHqbiJVHF3b50+3zo=
+			</data>
+		</dict>
+		<key>AppIcon60x60@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			oG5KmOCpQiUDpvvQ5BCULztEO5Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			5drPdcptl6BiY2Sr8vhfStU+7UbvrQMBkVfZ3IEARAU=
+			</data>
+		</dict>
+		<key>AppIcon60x60@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6iykKt1TKMuDC9IBYUHcMzFhmP0=
+			</data>
+			<key>hash2</key>
+			<data>
+			ECBRLo0Gl5d19lybHIUxusZBAnGBAZ30lw2Lo0XD+lw=
+			</data>
+		</dict>
+		<key>Assets.car</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Z0wIjJd0dAydumTEROBdf7yCdYE=
+			</data>
+			<key>hash2</key>
+			<data>
+			Hk3OWBXAhOIloPQgPd+onLhsnED2YoaJeFDpQFV1rZU=
+			</data>
+		</dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			T/BufsSfMBMCTYTljHU2gCawaI8=
+			15Hmon+naLjsMZXr5j3AiADHDcY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Nm9EegnosQezwHku3PyQi5/jF44PzmKq4bjcE9MPdMI=
+			dpHhMLChWwu05i6VSaFr4hsLu3Fks/MHob4tsTYHVoY=
 			</data>
 		</dict>
 		<key>Entypo.ttf</key>
@@ -350,44 +530,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bm6vpouM/Flp/lj8v/FPTNoeRLQ=
+			0zYPQ3JcWBGghSCdyYXXKZ2d134=
 			</data>
 			<key>hash2</key>
 			<data>
-			4fntlRSY1rsql5o3iH/S22Ccs6scMkMVbKCdTBbgpYo=
+			z9toMJub/7dERbX+e8NfbYXuL3mOCBR88xDrhT43ovc=
 			</data>
 		</dict>
 		<key>PlugIns/atiov2Tests.xctest/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pAXsY8SYmlrGsLLLGDd6zQah3Dw=
+			o6PmU7ZObFcIE3n1Nv3yoBIivt0=
 			</data>
 			<key>hash2</key>
 			<data>
-			hwCvpmGJobg6qKozgmzfKMceKS9SE6JntBd3lrQ6H40=
+			luD+ax4kaa/8bAmafExwfIKCfK5W/5cUDtqzsqmlfGE=
 			</data>
 		</dict>
 		<key>PlugIns/atiov2Tests.xctest/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			qsJUtRFe/L57zmKzdXtBL/+C5O8=
+			3ExpfXFybf8lt2B0SEdJ1r2Ld10=
 			</data>
 			<key>hash2</key>
 			<data>
-			3er15XKnwf0PcpuUGqyzz2mpZ9xvFoZzGkd+h9xFc7M=
+			PuL+7ndfPkZ46pi44cviBG1yj3txJCpuS4v+kYPr2CQ=
 			</data>
 		</dict>
 		<key>PlugIns/atiov2Tests.xctest/atiov2Tests</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rv5r8+qBiZLvbWXWgu2SDN8Vadc=
+			fXxMRGN5IULnILaLxZKleFLTOd4=
 			</data>
 			<key>hash2</key>
 			<data>
-			g+OeKvp3XPq2iPZ43GMyLc8IHyr319WSL548vHHjVME=
+			JUdw+dhQI6vsn4n/HnDHYJJLv4/mzQicgdRMS1sDBTg=
 			</data>
 		</dict>
 		<key>SimpleLineIcons.ttf</key>
