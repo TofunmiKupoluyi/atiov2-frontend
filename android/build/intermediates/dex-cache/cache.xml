@@ -3,201 +3,300 @@
 
     <item
         is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.50.4/jars/libs/infer-annotations-4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_9e20b0e5ad5685b0de6a2335e3946c08bc428897.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_1b22cef6c55cf07eb3230ad81ae443b8e160bb1c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/atiov2/react-native-vector-icons/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/atiov2-react-native-vector-icons-unspecified_7ca8ff55a5563e644a61c239588815efc599b9f0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_bfe70bdfcfc968c1a2503c90d715802bc5f78589.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
+        revision="26.0.1"
         sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_44622819c9889580a34d408bd6c3152963abf9d6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_a2727767620c062af2a8986c0850c77fa4781734.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_fcae1ee9bd8c32665cc0ffead708dee2ca420879.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_563bfaa53b2be3e5e33c3a82b2d5b1b3dd0c45c3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_c295ba85ba9a09b3f2da344d54ee143d8358ffa1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.50.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f768861356f4cd8613da447181fd15c3f584f52d">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.50.4_420cca9a100b557b59796a4a9870a96a66205b04.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_c06d6fc13ed21f1328698d8b1a42637d5c96e6f1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_4002eb19f530a2baec7a8de2b3ab5af67b237b02.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_daa10bd9dbe1d9ebfb286f9966917d8354b07df5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_def4b7bc5b6004406a93d466d5c04a058dce66fc.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_79203978ce98c5385b4f73f85509c1e48833fc91.jar" />
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.facebook.fresco-fresco-1.3.0_44622819c9889580a34d408bd6c3152963abf9d6.jar" />
     </item>
     <item
         is-multidex="false"
         jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
+        revision="26.0.1"
         sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_ceb5a14096542380595e53fede1350ff110f9ef6.jar" />
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.facebook.fresco-imagepipeline-1.3.0_ceb5a14096542380595e53fede1350ff110f9ef6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/26.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.android.support-support-v4-26.1.0_b9a010f24612806d94a1257445d226e1ccfe7d14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.facebook.fresco-imagepipeline-base-1.3.0_1b22cef6c55cf07eb3230ad81ae443b8e160bb1c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/26.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="508f50705b4fde51a16259f29c854201a3044516">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.android.support-support-core-ui-26.1.0_5497873d80ae631da2ea59de1a37df4834fbb1db.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/26.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.android.support-support-vector-drawable-26.1.0_aac9f872bf2be8928abaf2c8935458954b222592.jar" />
     </item>
     <item
         is-multidex="false"
         jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
+        revision="26.0.1"
         sha1="f162442a19fff13995fbd51ba414d9ee05579080">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_2b428dfa5fa3fd88cc85f9d59b22a81bbf1c15e1.jar" />
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/staticlayout-proxy-1.0_2b428dfa5fa3fd88cc85f9d59b22a81bbf1c15e1.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/tofunmi/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/26.1.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_cb8594ad069f2fadc61fc11e6d60ae75554500e4.jar" />
+        revision="26.0.1"
+        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.android.support-support-media-compat-26.1.0_f19cec6eacbd33082bd9cbdfd8824943eb3dbf37.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.facebook.fresco-drawee-1.3.0_79203978ce98c5385b4f73f85509c1e48833fc91.jar" />
     </item>
     <item
         is-multidex="false"
         jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
+        revision="26.0.1"
         sha1="8f615bca00639150c9eb6175d4b5471193f70794">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_ac3f65d169ca27f617ccfc669777c4779f5c4343.jar" />
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.facebook.soloader-soloader-0.1.0_ac3f65d169ca27f617ccfc669777c4779f5c4343.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/26.1.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_09a308af99462612a9361c7ecff8a207e58417e5.jar" />
+        revision="26.0.1"
+        sha1="f428e2fbc9ed0b297e3a3f420e51e6982f66822d">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.android.support-appcompat-v7-26.1.0_ecb9dd974be19e6865ed8b08d30dc717173212c5.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/26.1.0/814258103cf26a15fcc26ecce35f5b7d24b73f8/support-annotations-26.1.0.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_cac6a97c2657e73ff01394ded345800a934705aa.jar" />
+        revision="26.0.1"
+        sha1="0814258103cf26a15fcc26ecce35f5b7d24b73f8">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/support-annotations-26.1.0_2890162bb1954ffca501e740fb803943767a04e9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/26.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.android.support-animated-vector-drawable-26.1.0_954533b8ff9390a5154876f30ad9189c695329e1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_daa10bd9dbe1d9ebfb286f9966917d8354b07df5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/android.arch.lifecycle/runtime/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="b62fdc4cfef174c1e456014195c83fa7de7dc041">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/android.arch.lifecycle-runtime-1.0.0_61a9be2f757f33cd3b62cb46518a03c69e77f1d8.jar" />
     </item>
     <item
         is-multidex="false"
         jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
+        revision="26.0.1"
         sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_09176b761d7228146087b47d9f6f3ab225ec961b.jar" />
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/okio-1.13.0_09176b761d7228146087b47d9f6f3ab225ec961b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/Atio/react-native-vector-icons/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/Atio-react-native-vector-icons-unspecified_4d805d04e0aaf9674c24ce0a9de7ac1eaa0901ce.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_4002eb19f530a2baec7a8de2b3ab5af67b237b02.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/okhttp-urlconnection-3.6.0_def4b7bc5b6004406a93d466d5c04a058dce66fc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/javax.inject-1_a2727767620c062af2a8986c0850c77fa4781734.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/Atio/react-native-image-picker/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="beca3a29d7f67ed2242e46811ce303ec5417bb39">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/Atio-react-native-image-picker-unspecified_b9196f92889f4078138a0edfa334e3406733a4e0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.0.0/a2d487452376193fc8c103dd2b9bd5f2b1b44563/common-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="a2d487452376193fc8c103dd2b9bd5f2b1b44563">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/common-1.0.0_806418039abf59400986b2353f7a549c18110882.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/26.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="7efef32744ca4a436492d5cf28c08698cc2af256">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.android.support-support-fragment-26.1.0_f6073dcb93b0e104c59ac285a0b23d228fa43592.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/Atio/react-native-linear-gradient/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="2dc548cfd5edba58b8639fb9bd160fdb374115b6">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/Atio-react-native-linear-gradient-unspecified_8fa3b6f4e2d19f2ceae7aa5a01c6e4f525fc0437.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.50.4/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/infer-annotations-4.0_9e20b0e5ad5685b0de6a2335e3946c08bc428897.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/26.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="233f60a165ae622c8b36731502ebbda0f65e1930">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.android.support-support-core-utils-26.1.0_8e7feeaab8ade7b2ebc8522b18980f4de2b9bee7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/jsr305-3.0.0_563bfaa53b2be3e5e33c3a82b2d5b1b3dd0c45c3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/okhttp-3.6.0_c295ba85ba9a09b3f2da344d54ee143d8358ffa1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/26.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.android.support-support-compat-26.1.0_6025407506bc0e8e515171f4b49cfcb64570be52.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.0.0/e414a4cb28434e25c4f6aa71426eb20cf4874ae9/common-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/common-1.0.0_0b1a64a5d4fc8d3934f4006c9e170e4d59c28c7e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.facebook.fresco-fbcore-1.3.0_c06d6fc13ed21f1328698d8b1a42637d5c96e6f1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/bolts-tasks-1.4.0_fcae1ee9bd8c32665cc0ffead708dee2ca420879.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.50.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="f768861356f4cd8613da447181fd15c3f584f52d">
+        <dex dex="/Users/tofunmi/Documents/Non-Academic/Programming/React Projects/atiov2/android/app/build/intermediates/pre-dexed/release/com.facebook.react-react-native-0.50.4_420cca9a100b557b59796a4a9870a96a66205b04.jar" />
     </item>
 
 </items>

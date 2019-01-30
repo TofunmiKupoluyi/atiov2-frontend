@@ -1,5 +1,5 @@
 {
-  "name": "atiov2",
+  "name": "Atio",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -17,16 +17,21 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "prop-types": "^15.6.2",
     "react": "16.0.0",
     "react-native": "^0.50.3",
     "react-native-elements": "^0.19.0",
     "react-native-image-picker": "^0.26.7",
     "react-native-keyboard-aware-scroll-view": "^0.4.4",
+    "react-native-lightbox": "^0.7.0",
     "react-native-linear-gradient": "^2.4.0",
-    "react-native-super-grid": "^2.0.2",
-    "react-native-swiper": "^1.5.13",
+    "react-native-pinch-zoom-view": "^0.1.7",
+    "react-native-super-grid": "^2.4.1",
+    "react-native-swiper": "https://github.com/TofunmiKupoluyi/react-native-swiper.git",
+    "react-native-transformable-image": "https://github.com/TofunmiKupoluyi/react-native-transformable-image.git",
     "react-native-vector-icons": "^4.5.0",
     "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "socket.io-client": "^2.1.1"
   }
 }

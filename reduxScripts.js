@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 
 const initialState = {
     userId:"",
-    timeline: {rants: [], isLoading: true, isRefreshing: false, modalVisible: false},
+    timeline: {rants: [], isLoading: true, isRefreshing: false, modalVisible: false, imageModalVisible: false, imageDisplayed:""},
     search: {isFetching: false, search: [], query: "", lastQueryTime:0, selectedGroupId:"", modalOpen:false, mostPopularGroups:[], discoverGroups:[]},
     rantsLikedByUser: {rantsLiked: [], isRefreshing: true}
 }

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Streams Mobile POS</string>
+    <string name="placeholder_input_text">Enter text to print</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
