@@ -28,6 +28,14 @@ public class SyncFragment extends DialogFragment {
                 dismiss();
             }
         });
+        // Setting change terminal listener
+        ((Button)view.findViewById(R.id.change_terminal_button)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).changeTerminal();
+                dismiss();
+            }
+        });
         builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 ((MainActivity)getActivity()).sync();

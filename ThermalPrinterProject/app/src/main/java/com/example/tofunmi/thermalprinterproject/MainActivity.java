@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements Loginable {
     public final static String TABLE_NAME = "user_store";
     public final static String KEY_NAME_USERNAME = "username";
     public final static String KEY_NAME_PASSWORD = "password";
+    public final static String KEY_NAME_TERMINAL_DETAILS = "terminal_details";
+    public final static String KEY_NAME_BLUETOOTH_PRINTER = "bluetooth_mac_address";
+    public final static String KEY_NAME_COMPANY = "company";
     // Implemented fragments
     private SelectBrandFragment selectBrandFragment;
     private SelectSKUFragment selectSKUFragment;
@@ -517,7 +520,10 @@ public class MainActivity extends AppCompatActivity implements Loginable {
     // update function
     public void updateStore(View view) {
         if (hasUserBeenSaved()) {
-            showSyncFragment();
+            if (haveTerminalDetailsBeenAdded())
+                showSyncFragment();
+            else
+                showAddTerminalFragment();
         }
 
         else {
@@ -539,6 +545,11 @@ public class MainActivity extends AppCompatActivity implements Loginable {
         // Have option to keep data and to discard data, have text do you want to keep stored transaction data or not?
         DialogFragment newFragment = new LogoutFragment();
         newFragment.show(getSupportFragmentManager(), "logout");
+    }
+
+    public void showAddTerminalFragment() {
+        DialogFragment newFragment = new AddTerminalFragment();
+        newFragment.show(getSupportFragmentManager(), "add_terminal");
     }
 
     public void logout(boolean clearData) {
@@ -627,6 +638,12 @@ public class MainActivity extends AppCompatActivity implements Loginable {
         return password;
     }
 
+    public String getTerminalDetails() {
+        SharedPreferences settings = getSharedPreferences(TABLE_NAME, 0);
+        String terminalDetails = settings.getString(KEY_NAME_TERMINAL_DETAILS, null);
+        return terminalDetails;
+    }
+
     public void setUsername(String username) {
         SharedPreferences settings = getSharedPreferences(TABLE_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
@@ -641,11 +658,39 @@ public class MainActivity extends AppCompatActivity implements Loginable {
         editor.commit();
     }
 
+    public void setTerminalDetails(String terminalDetails, String bluetoothPrinter) {
+        SharedPreferences settings = getSharedPreferences(TABLE_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(KEY_NAME_TERMINAL_DETAILS, terminalDetails);
+        editor.putString(KEY_NAME_BLUETOOTH_PRINTER, bluetoothPrinter);
+        editor.commit();
+    }
+
+    public void setCompany(String company) {
+        SharedPreferences settings = getSharedPreferences(TABLE_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(KEY_NAME_COMPANY, company);
+        editor.commit();
+    }
+
     private void clearSharedPreferences() {
         SharedPreferences settings = getSharedPreferences(TABLE_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.clear();
         editor.commit();
+    }
+
+    private void clearTerminalPreferences() {
+        SharedPreferences settings = getSharedPreferences(TABLE_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.remove(KEY_NAME_TERMINAL_DETAILS);
+        editor.remove(KEY_NAME_BLUETOOTH_PRINTER);
+        editor.commit();
+    }
+
+    public void changeTerminal() {
+        clearTerminalPreferences();
+        updateStore(null);
     }
 
     public boolean hasUserBeenSaved() {
@@ -659,8 +704,35 @@ public class MainActivity extends AppCompatActivity implements Loginable {
         }
     }
 
-    public void respondToLogin() {
+    public boolean haveTerminalDetailsBeenAdded() {
+
+        SharedPreferences settings = getSharedPreferences(TABLE_NAME, 0);
+        String terminalDetails = settings.getString(KEY_NAME_TERMINAL_DETAILS, null);
+
+        if (terminalDetails == null) {
+            return false;
+        }   else {
+            return true;
+        }
+
+    }
+
+    public String getBluetoothPrinter() {
+
+        SharedPreferences settings = getSharedPreferences(TABLE_NAME, 0);
+        String bluetoothPrinter = settings.getString(KEY_NAME_BLUETOOTH_PRINTER, null);
+
+        if (bluetoothPrinter == null) {
+            return "";
+        }   else {
+            return bluetoothPrinter;
+        }
+
+    }
+
+    public void respondToLogin(boolean successful) {
         this.updateStore(null);
+
     }
 
 

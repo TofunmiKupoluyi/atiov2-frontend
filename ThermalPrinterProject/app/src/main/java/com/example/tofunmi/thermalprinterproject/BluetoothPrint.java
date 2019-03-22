@@ -26,26 +26,33 @@ public class BluetoothPrint extends AsyncTask<Void, Void, Boolean> {
     private static final int CHAR_WIDTH = 32;
     private double change;
     private String paymentType;
+    private String printerMacId;
+    private String company;
 
-    BluetoothPrint(Activity activity, ArrayList<OutputItem> orderedItems, String paymentType) {
+    BluetoothPrint(Activity activity, ArrayList<OutputItem> orderedItems, String paymentType, String printerMacId, String company) {
         this.activity = activity;
         this.orderedItems = orderedItems;
         this.change = 0;
         this.paymentType = paymentType;
+        this.printerMacId = printerMacId;
+        this.company = company;
     }
 
-    BluetoothPrint(Activity activity, ArrayList<OutputItem> orderedItems, String paymentType, double change) {
+    BluetoothPrint(Activity activity, ArrayList<OutputItem> orderedItems, String paymentType, double change, String printerMacId, String company) {
         this.activity = activity;
         this.orderedItems = orderedItems;
         this.paymentType = paymentType;
         this.change = change;
+        this.printerMacId = printerMacId;
+        this.company = company;
     }
     @Override
     protected Boolean doInBackground(Void... voids) {
         final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
         // Concatenating the ordered items
-        String orderedItemsString =  centralizeLine("Invoice / Bill")+"\n\n";
+        String orderedItemsString =  centralizeLine("Invoice / Bill")+"\n";
+        orderedItemsString += centralizeLine(company) + "\n\n";
         orderedItemsString += roundToColumn("Brand") + roundToColumn("SKU") + roundToColumn("Qty") + roundToColumn("Total")+"\n";
         double total = 0;
         for(int i=0; i< orderedItems.size(); i++) {
@@ -83,9 +90,11 @@ public class BluetoothPrint extends AsyncTask<Void, Void, Boolean> {
 //        MAC ADDRESS FOR NEW PRINTER DAD ORDERED
 //        String macAddress = "DC:0D:30:2B:CE:CC";
 //        MAC ADDRESS FOR ORIGINAL PRINTER
-        String macAddress = "DC:0D:30:0E:40:8C";
+//        String macAddress = "DC:0D:30:0E:40:8C";
+        // MAC ADDRESS FOR PRINTER 2/11/19
+//        String macAddress="66:12:36:3E:EF:8C";
 
-        BluetoothDevice printer = adapter.getRemoteDevice(macAddress);
+        BluetoothDevice printer = adapter.getRemoteDevice(printerMacId);
         BluetoothSocket socket = null;
         System.out.println(orderedItemsString);
         try {
@@ -95,6 +104,8 @@ public class BluetoothPrint extends AsyncTask<Void, Void, Boolean> {
             byte[] escText = new byte[] { 27, '@', '\r' };
             out.write(escText);
             out.write((orderedItemsString).getBytes());
+            out.write(0xA);
+            out.flush();
             return true;
 
         } catch (Exception ex) {
@@ -142,7 +153,7 @@ public class BluetoothPrint extends AsyncTask<Void, Void, Boolean> {
 
     private String centralizeLine(String line) {
         if (line.length() < CHAR_WIDTH) {
-            int leftOffset = Math.round(line.length()/2);
+            int leftOffset = Math.round(0/2);
             int rightOffset = CHAR_WIDTH - line.length() -leftOffset;
             String leftSpace = new String(new char[leftOffset]).replace("\0", " ");
             String rightSpace = new String(new char[rightOffset]).replace("\0", " ");

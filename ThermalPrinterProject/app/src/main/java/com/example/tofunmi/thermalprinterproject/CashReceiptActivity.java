@@ -104,13 +104,28 @@ public class CashReceiptActivity extends AppCompatActivity implements Loginable,
         new EmailReceipt(this, orderedItems).execute(getUsername(), getPassword(), email, modeOfPayment, amountPaid, change);
     }
 
+    public String getBluetoothPrinter() {
+
+        SharedPreferences settings = getSharedPreferences(MainActivity.TABLE_NAME, 0);
+        String bluetoothPrinter = settings.getString(MainActivity.KEY_NAME_BLUETOOTH_PRINTER, null);
+
+        if (bluetoothPrinter == null) {
+            return "";
+        }   else {
+            return bluetoothPrinter;
+        }
+
+    }
+
+
     public void printMessage(View v) {
         try {
-            new BluetoothPrint(this, orderedItems, "Cash" , currencyFormatter.parse(this.change).doubleValue()).execute();
+            new BluetoothPrint(this, orderedItems, "Cash" , currencyFormatter.parse(this.change).doubleValue(), getBluetoothPrinter(), getCompany()).execute();
         }   catch (Exception ex) {
-            new BluetoothPrint(this, orderedItems, "Cash").execute();
+            new BluetoothPrint(this, orderedItems, "Cash", getBluetoothPrinter(), getCompany()).execute();
         }
     }
+
 
     private void createRecyclerView() {
         RecyclerView parentView = (RecyclerView) findViewById(R.id.cash_receipt_list_view);
@@ -147,6 +162,21 @@ public class CashReceiptActivity extends AppCompatActivity implements Loginable,
         editor.commit();
     }
 
+    public void setCompany(String company) {
+        SharedPreferences settings = getSharedPreferences(MainActivity.TABLE_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(MainActivity.KEY_NAME_COMPANY, company);
+        editor.commit();
+    }
+
+    public String getCompany() {
+        SharedPreferences settings = getSharedPreferences(MainActivity.TABLE_NAME, 0);
+        String company = settings.getString(MainActivity.KEY_NAME_COMPANY, null);
+        return company;
+    }
+
+
+
     public boolean hasUserBeenSaved() {
         SharedPreferences settings = getSharedPreferences(MainActivity.TABLE_NAME, 0);
         String username = settings.getString(MainActivity.KEY_NAME_USERNAME, null);
@@ -158,9 +188,19 @@ public class CashReceiptActivity extends AppCompatActivity implements Loginable,
         }
     }
 
-    public void respondToLogin() {
+
+    public void setTerminalDetails(String terminalDetails, String bluetoothPrinter) {
+        SharedPreferences settings = getSharedPreferences(MainActivity.TABLE_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(MainActivity.KEY_NAME_TERMINAL_DETAILS, terminalDetails);
+        editor.putString(MainActivity.KEY_NAME_BLUETOOTH_PRINTER, bluetoothPrinter);
+        editor.commit();
+    }
+
+    public void respondToLogin(boolean successful) {
         this.showEnterEmailDialog(null);
     }
+
 
 
 

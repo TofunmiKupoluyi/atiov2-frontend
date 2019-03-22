@@ -38,4 +38,13 @@
         android:layout_marginTop="30dp"
         android:maxLines="1"/>
 
+    <Button
+        android:id="@+id/change_terminal_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Terminal"
+        android:layout_marginTop="10dp"
+        android:maxLines="1"/>
+
+
 </LinearLayout>

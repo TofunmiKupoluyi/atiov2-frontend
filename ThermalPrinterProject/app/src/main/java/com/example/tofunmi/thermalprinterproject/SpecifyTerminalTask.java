@@ -14,24 +14,26 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class LoginTask extends AsyncTask<String, Void, Boolean> {
+public class SpecifyTerminalTask extends AsyncTask<String, Void, Boolean> {
     Loginable activity;
-    LoginTask(Loginable activity) {
+    SpecifyTerminalTask(Loginable activity) {
         this.activity = activity;
     }
     @Override
     protected Boolean doInBackground(String... strings) {
         try {
             // If we have sufficient args
-            if (strings.length >= 2) {
-                String username = Uri.encode(strings[0]);
-                String password = Uri.encode(strings[1]);
-                String payload = "email=" + username + "&password=" + password;
+            if (strings.length >= 1) {
+                String username = activity.getUsername();
+                String password = activity.getPassword();
+                String terminalDetails = Uri.encode(strings[0]);
+                String payload = "email=" + Uri.encode(username) + "&password=" + Uri.encode(password) + "&terminalToVerify=" + terminalDetails;
+                System.out.println(payload);
                 byte[] payloadBytes = payload.getBytes();
 
 
                 // making connection
-                URL url = new URL("https://kupoluyi.com:3000/account/getencrypteddetails");
+                URL url = new URL("https://kupoluyi.com:3000/account/getencryptedterminaldetails");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -49,12 +51,10 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
                     String jsonString = bufferedReader.readLine();
 
                     JSONObject json = new JSONObject(jsonString);
-                    String encryptedEmail = json.getString("encryptedEmail");
-                    String encryptedPassword = json.getString("encryptedPassword");
-                    String company = json.getString("company");
-                    activity.setUsername(encryptedEmail);
-                    activity.setPassword(encryptedPassword);
-                    activity.setCompany(company);
+                    System.out.println(jsonString);
+                    String encryptedTerminalDetails = json.getString("encryptedTerminalDetails");
+                    String bluetoothPrinter = json.getString("bluetoothPrinter");
+                    activity.setTerminalDetails(encryptedTerminalDetails, bluetoothPrinter);
                     return true;
                 }
             }
@@ -77,7 +77,7 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
 
     @Override
     protected void onProgressUpdate(Void... values) {
-        Toast.makeText(activity.getApplicationContext(), "Logging in ...", Toast.LENGTH_LONG).show();
+        Toast.makeText(activity.getApplicationContext(), "Sending ...", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -85,10 +85,10 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
 
         if (isSuccessful) {
             activity.respondToLogin(true);
-            Toast.makeText(activity.getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity.getApplicationContext(), "Terminal Setup Successful", Toast.LENGTH_LONG).show();
         } else {
             activity.respondToLogin(false);
-            Toast.makeText(activity.getApplicationContext(), "There was an error logging in, try again", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity.getApplicationContext(), "There was an error adding terminal details in, try again", Toast.LENGTH_LONG).show();
         }
 
     }
